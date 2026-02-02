@@ -13,28 +13,6 @@ Engineer domain-driven habitability features
 Prepare machine learning–ready datasets
 Avoid data leakage through proper preprocessing pipelines
 
-🗂️ Project Structure
-ExoHabit-AI/
-│
-├── data/
-│   ├── raw/
-│   │   └── exoplanet_raw.csv
-│   │
-│   ├── processed/
-│   │   ├── exoplanet_cleaned.csv
-│   │   ├── X_train.csv
-│   │   ├── X_test.csv
-│   │   ├── y_train.csv
-│   │   ├── y_test.csv
-│   │   └── preprocessing_pipeline.pkl
-│
-├── notebooks/
-│   ├── Week1_Data_Understanding.ipynb
-│   ├── Week2_Data_Cleaning_Feature_Engineering.ipynb
-│   └── Week3_ML_Dataset_Preparation.ipynb
-│
-├── README.md
-└── .gitignore
 
 📅 Weekly Breakdown
 🔹 Week 1 — Data Collection & Understanding
