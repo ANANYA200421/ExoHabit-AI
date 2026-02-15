@@ -1,10 +1,12 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 
 import joblib
 import pandas as pd
 
-app = Flask(__name__)
+app = Flask(__name__,
+            template_folder="../frontend/templates",
+            static_folder="../frontend/static")
 
 # Load model and preprocessing pipeline
 model = joblib.load("../models/best_model_random_forest.pkl")
@@ -16,6 +18,9 @@ def home():
         "status": "ExoHabitAI API Running",
         "message": "Welcome to Habitability Prediction API"
     })
+@app.route("/ui")
+def ui():
+    return render_template("index.html")
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -37,7 +42,7 @@ def predict():
             if field not in data:
                 return jsonify({"error": f"Missing field: {field}"}), 400
 
-        # 🔑 THIS WAS MISSING
+       
         input_df = pd.DataFrame([{
     "pl_rade": data["planet_radius"],
     "pl_orbper": data["orbital_period"],
