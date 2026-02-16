@@ -1,67 +1,53 @@
-🌍 Predicting Exoplanet Habitability Using Machine Learning
-📌 Project Overview
+🌌 ExoHabit-AI
+Machine Learning Based Exoplanet Habitability Prediction System
+🚀 Project Overview
 
-This project focuses on the early-stage development of a machine learning pipeline for predicting exoplanet habitability.
-The work covers data understanding, preprocessing, and machine learning dataset preparation, following scientific and industry-standard practices.
+ExoHabit-AI is an end-to-end Machine Learning web application designed to predict and analyze the habitability of exoplanets based on planetary and stellar parameters.
 
-The objective of the current phase (Weeks 1–3) is to ensure high-quality, leakage-free data before model training.
+The system integrates:
+Data preprocessing pipeline
+Machine learning models (Random Forest)
+Flask REST API backend
+Interactive Plotly dashboard
+Responsive frontend interface
+Exportable scientific reports
 
-🎯 Objectives (Weeks 1–3)
-Understand exoplanet and host star characteristics
-Clean and preprocess raw astronomical data
-Engineer domain-driven habitability features
-Prepare machine learning–ready datasets
-Avoid data leakage through proper preprocessing pipelines
+🎯 Objectives
+Predict exoplanet habitability probability
+Rank exoplanets based on ML confidence
+Visualize feature importance and correlations
+Provide an interactive scientific dashboard
+Enable export of top candidate reports
 
+🧠 Machine Learning Models Used
+Logistic Regression (Baseline)
+Random Forest (Best Performing)
+XGBoost
 
-📅 Weekly Breakdown
-🔹 Week 1 — Data Collection & Understanding
-Explored exoplanet and host star datasets
-Studied feature distributions, correlations, and observational biases
-Created astronomy-driven visualizations
-Documented initial scientific observations
-Output:
-Loaded dataset
-Exploratory visualizations
-Initial observations
+Evaluation Metrics:
+Accuracy
+Precision
+Recall
+F1-Score
+ROC-AUC
 
-🔹 Week 2 — Data Cleaning & Feature Engineering
-Handled missing values using robust statistical methods
-Analyzed and retained astronomical outliers
-Encoded stellar spectral class information
-Normalized numerical features
-Engineered custom features:
-Habitability Score Index
-Stellar Compatibility Index
-Validated data quality using visualizations
-Output:
-Cleaned dataset
-Feature-engineered dataset
-Data validation plots
+📊 Interactive Dashboard Features
+Feature Importance (Plotly Interactive)
+Habitability Probability Distribution
+Star–Planet Correlation Heatmap
+Downloadable Top 20 Exoplanets Report (Excel)
 
-🔹 Week 3 — Machine Learning Dataset Preparation
-Selected important features using correlation analysis and domain knowledge
-Defined a binary target variable (Habitable / Not Habitable)
-Performed an 80:20 stratified train–test split
-Built a unified preprocessing pipeline:
-Scaling
-Encoding
-Ensured no data leakage by fitting preprocessing only on training data
-Saved ML-ready datasets and preprocessing pipeline
-Output:
-Final feature matrix (X) and target vector (y)
-Train–test datasets
-ML-ready preprocessing pipeline
+🖥️ System Architecture
+User Input → Flask API → Preprocessing Pipeline → ML Model → Prediction
+                                             ↓
+                                       Plotly Dashboard
 
-🛠️ Tools & Technologies Used
+🛠️ Tech Stack
 Python
-Pandas, NumPy
-Matplotlib, Seaborn
+Flask
 Scikit-learn
-Joblib
-Git & GitHub Desktop
-
-🔮 Next Phase (Planned)
-Machine learning model training and evaluation
-Exoplanet habitability prediction and ranking
-(Covered in subsequent weeks)
+Pandas
+Plotly
+Bootstrap
+JavaScript
+HTML/CSS

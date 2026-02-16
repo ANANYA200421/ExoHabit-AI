@@ -1,0 +1,77 @@
+<script id="feature-data" type="application/json">
+{{ feature_importance | tojson }}
+</script>
+
+<script id="probability-data" type="application/json">
+{{ probabilities | tojson }}
+</script>
+
+<script id="correlation-data" type="application/json">
+{{ correlation_data | tojson }}
+</script>
+
+<script id="correlation-columns" type="application/json">
+{{ correlation_columns | tojson }}
+</script>
+
+<script>
+
+const featureImportance =
+    JSON.parse(document.getElementById("feature-data").textContent);
+
+const probabilities =
+    JSON.parse(document.getElementById("probability-data").textContent);
+
+const correlationData =
+    JSON.parse(document.getElementById("correlation-data").textContent);
+
+const correlationColumns =
+    JSON.parse(document.getElementById("correlation-columns").textContent);
+
+
+// ================= FEATURE IMPORTANCE =================
+if (Object.keys(featureImportance).length > 0) {
+
+    const features = Object.keys(featureImportance);
+    const values = Object.values(featureImportance);
+
+    Plotly.newPlot("featureImportance", [{
+        x: values,
+        y: features,
+        type: "bar",
+        orientation: "h",
+        marker: {color: "cyan"}
+    }], {
+        paper_bgcolor: "#343a40",
+        plot_bgcolor: "#343a40",
+        font: {color: "white"}
+    });
+}
+
+
+// ================= DISTRIBUTION =================
+Plotly.newPlot("distributionPlot", [{
+    x: probabilities,
+    type: "histogram",
+    marker: {color: "orange"}
+}], {
+    paper_bgcolor: "#343a40",
+    plot_bgcolor: "#343a40",
+    font: {color: "white"}
+});
+
+
+// ================= CORRELATION HEATMAP =================
+Plotly.newPlot("correlationHeatmap", [{
+    z: correlationData,
+    x: correlationColumns,
+    y: correlationColumns,
+    type: "heatmap",
+    colorscale: "Viridis"
+}], {
+    paper_bgcolor: "#343a40",
+    plot_bgcolor: "#343a40",
+    font: {color: "white"}
+});
+
+</script>
