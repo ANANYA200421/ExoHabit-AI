@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>ExoHabitAI – About</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <style>
+    body {
+      background: radial-gradient(circle at top, #1a1036 0, #020012 55%, #020617 100%);
+      color: #f3f4ff;
+      scroll-behavior: smooth;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .navbar {
+      background: linear-gradient(90deg, #020617, #4c1d95);
+      border-bottom: 1px solid #1f2937;
+    }
+
+    .nav-link {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+      color: #f9fafb;
+      border-bottom: 2px solid #a855f7;
+    }
+
+    .card {
+      background-color: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 1rem;
+      color: #f9fafb;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    .card-header {
+      border-bottom: 1px solid #1f2937;
+      color: #f9fafb;
+    }
+
+    /* Exoplanet facts carousel */
+    .exofacts-section {
+      background: #0b0f19;
+      color: #ffffff;
+      padding: 3.5rem 1.25rem;
+      border-radius: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .exofacts-heading {
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .exofacts-subtitle {
+      color: #c7c9ff;
+    }
+
+    .exofacts-carousel .carousel-indicators [data-bs-target] {
+      background-color: #6c63ff;
+    }
+
+    .exofacts-carousel .carousel-control-prev-icon,
+    .exofacts-carousel .carousel-control-next-icon {
+      filter: drop-shadow(0 0 6px #6c63ff);
+    }
+
+    .exofacts-card {
+      background: radial-gradient(circle at top left, rgba(108, 99, 255, 0.14), rgba(15, 23, 42, 0.95));
+      border-radius: 1.5rem;
+      border: 1px solid rgba(108, 99, 255, 0.35);
+      box-shadow:
+        0 18px 40px rgba(3, 7, 18, 0.9),
+        0 0 20px rgba(108, 99, 255, 0.4);
+      backdrop-filter: blur(18px);
+      padding: 2.5rem 1.5rem;
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .exofacts-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #ffffff;
+    }
+
+    .exofacts-text {
+      font-size: 0.98rem;
+      color: #e5e7ff;
+      line-height: 1.7;
+    }
+
+    .exofacts-glow-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #6c63ff;
+      box-shadow: 0 0 12px #6c63ff;
+      display: inline-block;
+      margin-right: 0.4rem;
+    }
+
+    .exofacts-section {
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity 0.8s ease-out,
+        transform 0.8s ease-out;
+    }
+
+    .exofacts-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-semibold" href="/">ExoHabitAI</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/predict">Prediction</a></li>
+          <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/about">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-xl py-4 mb-5">
+    <section>
+      <h2 class="h3 mb-3">About ExoHabitAI – Interesting Facts</h2>
+
+      <!-- Interesting Facts Carousel -->
+      <section class="exofacts-section mt-4" id="exo-facts">
+        <div class="container px-0">
+          <div class="text-center mb-4">
+            <span class="exofacts-glow-dot"></span>
+            <span class="text-uppercase small text-muted">Insights</span>
+            <h3 class="exofacts-heading mt-2">🌌 Interesting Facts About Exoplanets</h3>
+            <p class="exofacts-subtitle mb-0">
+              Turning predictions into stories about distant worlds.
+            </p>
+          </div>
+
+          <div id="exoFactsCarousel" class="carousel slide exofacts-carousel" data-bs-ride="carousel"
+            data-bs-interval="5000" data-bs-pause="hover">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#exoFactsCarousel" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Fact 1"></button>
+              <button type="button" data-bs-target="#exoFactsCarousel" data-bs-slide-to="1" aria-label="Fact 2"></button>
+              <button type="button" data-bs-target="#exoFactsCarousel" data-bs-slide-to="2" aria-label="Fact 3"></button>
+              <button type="button" data-bs-target="#exoFactsCarousel" data-bs-slide-to="3" aria-label="Fact 4"></button>
+              <button type="button" data-bs-target="#exoFactsCarousel" data-bs-slide-to="4" aria-label="Fact 5"></button>
+              <button type="button" data-bs-target="#exoFactsCarousel" data-bs-slide-to="5" aria-label="Fact 6"></button>
+            </div>
+
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="exofacts-card">
+                  <h3 class="exofacts-title">More Planets Than Stars</h3>
+                  <p class="exofacts-text">
+                    Scientists estimate that billions of exoplanets exist in the Milky Way galaxy alone.
+                    That means there may be more planets than stars – and countless worlds still waiting
+                    to be discovered.
+                  </p>
+                </div>
+              </div>
+
+              <div class="carousel-item">
+                <div class="exofacts-card">
+                  <h3 class="exofacts-title">The Goldilocks Zone</h3>
+                  <p class="exofacts-text">
+                    A planet must orbit at just the right distance from its star for liquid water to exist
+                    on the surface – not too hot, not too cold. This orbital sweet spot is called the
+                    “Goldilocks zone.”
+                  </p>
+                </div>
+              </div>
+
+              <div class="carousel-item">
+                <div class="exofacts-card">
+                  <h3 class="exofacts-title">Extreme Worlds</h3>
+                  <p class="exofacts-text">
+                    Some exoplanets are hotter than lava, with temperatures above 2000&nbsp;°C, while others
+                    may hide vast underground oceans. Habitability can appear in surprising and extreme
+                    environments.
+                  </p>
+                </div>
+              </div>
+
+              <div class="carousel-item">
+                <div class="exofacts-card">
+                  <h3 class="exofacts-title">AI in Space Research</h3>
+                  <p class="exofacts-text">
+                    Machine Learning models help astronomers classify and rank potentially habitable
+                    planets across massive datasets, revealing patterns that would be impossible to spot
+                    by eye alone.
+                  </p>
+                </div>
+              </div>
+
+              <div class="carousel-item">
+                <div class="exofacts-card">
+                  <h3 class="exofacts-title">Stellar Influence</h3>
+                  <p class="exofacts-text">
+                    A planet’s host star type, radiation, and stability strongly affect its habitability.
+                    Two planets with similar orbits can have very different climates if their stars are
+                    not alike.
+                  </p>
+                </div>
+              </div>
+
+              <div class="carousel-item">
+                <div class="exofacts-card">
+                  <h3 class="exofacts-title">Habitability Score</h3>
+                  <p class="exofacts-text">
+                    ExoHabitAI predicts a habitability score, turning complex physical parameters into a
+                    single ranking that helps prioritize which exoplanets should be studied next.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#exoFactsCarousel"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#exoFactsCarousel"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+  <script>
+    // Fade-in on scroll for the facts carousel
+    (function () {
+      const section = document.getElementById("exo-facts");
+      if (!section || !("IntersectionObserver" in window)) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              section.classList.add("visible");
+              observer.disconnect();
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      observer.observe(section);
+    })();
+  </script>
+</body>
+
+</html>
+
