@@ -1,154 +1,80 @@
-from flask import Flask, request, jsonify
-import joblib
+from flask import Flask, render_template, request, jsonify
 import numpy as np
+import joblib
 import os
 
-# ------------------------------------------------
-# Setup paths
-# ------------------------------------------------
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# ================= PATH SETUP =================
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-MODEL_PATH = os.path.join(
-    BASE_DIR, "..", "models", "final_habitability_model.pkl"
+app = Flask(
+    __name__,
+    template_folder=os.path.join(BASE_DIR, "frontend", "templates")
 )
 
-# ------------------------------------------------
-# Initialize Flask app
-# ------------------------------------------------
-app = Flask(__name__)
+MODEL_PATH = os.path.join(BASE_DIR, "models", "final_habitability_model.pkl")
 
-# ------------------------------------------------
-# Load ML Model
-# ------------------------------------------------
-try:
-    model = joblib.load(MODEL_PATH)
-    print("✅ Model Loaded Successfully")
-except Exception as e:
-    print("❌ Model Load Failed:", e)
-    model = None
+model = joblib.load(MODEL_PATH)
+print("MODEL LOADED SUCCESSFULLY")
 
-# ------------------------------------------------
-# Health Check
-# ------------------------------------------------
-@app.route("/", methods=["GET"])
+
+# ================= HOME =================
+@app.route("/")
 def home():
-    return jsonify({
-        "status": "success",
-        "message": "ExoHabit-AI Backend Running 🚀",
-        "endpoints": {
-            "/predict": "POST – Predict habitability for one planet",
-            "/rank": "POST – Rank multiple planets by habitability"
-        }
-    })
+    return render_template("index.html")
 
-# ------------------------------------------------
-# Prediction Endpoint (Single Planet)
-# ------------------------------------------------
+
+# ================= PREDICT =================
 @app.route("/predict", methods=["POST"])
 def predict():
     try:
-        if model is None:
-            return jsonify({"error": "Model not loaded"}), 500
-
         data = request.get_json()
-        if not data:
-            return jsonify({"error": "No JSON data provided"}), 400
 
-        required_fields = [
-            "pl_rade",
-            "pl_eqt",
-            "pl_orbper",
-            "st_teff",
-            "stellar_compatibility"
-        ]
+        pl_rade = float(data["pl_rade"])
+        pl_mass = float(data["pl_bmasse"])
+        pl_orbper = float(data["pl_orbper"])
+        pl_eqt = float(data["pl_eqt"])
 
-        for field in required_fields:
-            if field not in data:
-                return jsonify({"error": f"Missing field: {field}"}), 400
+        # ⭐ HANDLE "G (Sun-like)" → G
+        spectral = data["spectral_type"][0].upper()
 
-        features = np.array([[
-            float(data["pl_rade"]),
-            float(data["pl_eqt"]),
-            float(data["pl_orbper"]),
-            float(data["st_teff"]),
-            float(data["stellar_compatibility"])
+        # ⭐ AUTO STELLAR COMPATIBILITY
+        spectral_map = {
+            "O":0.1,
+            "B":0.2,
+            "A":0.3,
+            "F":0.6,
+            "G":0.9,
+            "K":0.8,
+            "M":0.5
+        }
+
+        stellar_compatibility = spectral_map.get(spectral, 0.5)
+
+        # ⭐ MODEL INPUT (5 FEATURES ONLY)
+        features = np.array([[ 
+            pl_rade,
+            pl_mass,
+            pl_orbper,
+            pl_eqt,
+            stellar_compatibility
         ]])
 
-        prediction = int(model.predict(features)[0])
-
-        proba = model.predict_proba(features)[0]
-        probability = float(proba[1]) if len(proba) > 1 else 0.0
+        prediction = model.predict(features)[0]
+        prob = model.predict_proba(features)[0][1]
 
         return jsonify({
-            "habitable": prediction,
-            "habitability_probability": round(probability, 4),
-            "interpretation": (
-                "Habitable Candidate" if prediction == 1
-                else "Non-Habitable"
-            )
+            "success": True,
+            "habitable": int(prediction),
+            "habitability_probability": round(float(prob),3)
         })
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-# ------------------------------------------------
-# Ranking Endpoint (Multiple Planets)
-# ------------------------------------------------
-@app.route("/rank", methods=["POST"])
-def rank():
-    try:
-        if model is None:
-            return jsonify({"error": "Model not loaded"}), 500
-
-        data = request.get_json()
-        if not data or "planets" not in data:
-            return jsonify({"error": "Missing 'planets' array"}), 400
-
-        ranked_results = []
-
-        for planet in data["planets"]:
-            required_fields = [
-                "pl_rade",
-                "pl_eqt",
-                "pl_orbper",
-                "st_teff",
-                "stellar_compatibility"
-            ]
-
-            for field in required_fields:
-                if field not in planet:
-                    return jsonify({"error": f"Missing field: {field}"}), 400
-
-            features = np.array([[
-                float(planet["pl_rade"]),
-                float(planet["pl_eqt"]),
-                float(planet["pl_orbper"]),
-                float(planet["st_teff"]),
-                float(planet["stellar_compatibility"])
-            ]])
-
-            proba = model.predict_proba(features)[0]
-            score = float(proba[1]) if len(proba) > 1 else 0.0
-
-            planet_out = planet.copy()
-            planet_out["habitability_score"] = round(score, 4)
-
-            ranked_results.append(planet_out)
-
-        ranked_results.sort(
-            key=lambda x: x["habitability_score"],
-            reverse=True
-        )
-
+        print("ERROR:", e)
         return jsonify({
-            "ranked_planets": ranked_results
+            "success": False,
+            "message": str(e)
         })
 
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
 
-# ------------------------------------------------
-# Run Server
-# ------------------------------------------------
 if __name__ == "__main__":
     app.run(debug=True)
