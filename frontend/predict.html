@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Habitability Prediction</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+<h1>Habitability Prediction</h1>
+
+<div class="card">
+
+<input id="radius" placeholder="Planet Radius">
+<input id="mass" placeholder="Planet Mass">
+<input id="period" placeholder="Orbital Period">
+<input id="temp" placeholder="Equilibrium Temperature">
+
+<select id="starType">
+<option value="O">O</option>
+<option value="B">B</option>
+<option value="A">A</option>
+<option value="F">F</option>
+<option value="G" selected>G</option>
+<option value="K">K</option>
+<option value="M">M</option>
+</select>
+
+<button onclick="predictHabitability()">Predict</button>
+
+</div>
+
+<div id="result"></div>
+
+<script src="/js/predict.js"></script>
+
+</body>
+</html>

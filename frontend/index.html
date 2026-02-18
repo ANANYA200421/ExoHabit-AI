@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ExoHabitAI</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+<div class="logo">🌌 ExoHabitAI</div>
+<div class="nav-links">
+<a href="/">Predictor</a>
+<a href="/dashboard">Dashboard</a>
+</div>
+</nav>
+
+<h1>Exoplanet Habitability Predictor</h1>
+
+<div class="card">
+
+<h3>Planet Parameters</h3>
+<input type="number" id="pl_rade" placeholder="Planet Radius">
+<input type="number" id="pl_mass" placeholder="Planet Mass">
+<input type="number" id="pl_orbper" placeholder="Orbital Period">
+<input type="number" id="pl_eqt" placeholder="Equilibrium Temperature">
+
+<h3>Host Star</h3>
+<input type="number" id="st_teff" placeholder="Star Temperature">
+<input type="text" id="st_sptype" placeholder="Spectral Type">
+
+<button onclick="predict()">Predict</button>
+</div>
+
+<div class="card">
+<p id="result">Waiting...</p>
+<p id="score"></p>
+</div>
+
+<script src="/js/script.js"></script>
+</body>
+</html>

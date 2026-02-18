@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Mission Control</title>
+<link rel="stylesheet" href="/css/mission.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+
+<!-- ================= TOP CONTROL BAR ================= -->
+
+<header class="topbar">
+<div class="brand">EXOHABIT MISSION CONTROL</div>
+
+<div class="nav">
+<a href="/">HOME</a>
+<a href="/predict">PREDICT</a>
+<a href="/dashboard">ANALYTICS</a>
+</div>
+
+<div class="status">
+● LINK STABLE
+</div>
+</header>
+
+<!-- ================= MAIN CONTROL GRID ================= -->
+
+<div class="control-grid">
+
+<section class="panel planet">
+<h3>Planet Visualization</h3>
+<div id="planet"></div>
+</section>
+
+<section class="panel orbit">
+<h3>Orbital Simulation</h3>
+<div id="orbit"></div>
+</section>
+
+<section class="panel telemetry">
+<h3>Telemetry Data</h3>
+<pre id="telemetry"></pre>
+</section>
+
+<section class="panel radar">
+<h3>Radar Scan</h3>
+<div id="radar"></div>
+</section>
+
+</div>
+
+<!-- ================= DATA STREAM ================= -->
+
+<section class="log-panel">
+<h3>System Data Stream</h3>
+<pre id="log"></pre>
+</section>
+
+<script src="/js/planet3d.js"></script>
+<script src="/js/orbit.js"></script>
+<script src="/js/radar.js"></script>
+<script src="/js/telemetry.js"></script>
+<script src="/js/logger.js"></script>
+
+</body>
+</html>

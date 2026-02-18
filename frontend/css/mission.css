@@ -1,0 +1,88 @@
+body{
+margin:0;
+font-family:Segoe UI, monospace;
+background:#02060d;
+color:#cfe9ff;
+}
+
+/* TOP BAR */
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 30px;
+background:#0a1420;
+border-bottom:1px solid #1f3a5a;
+}
+
+.brand{
+font-weight:600;
+letter-spacing:1px;
+}
+
+.nav a{
+margin-left:25px;
+color:#9ecbff;
+text-decoration:none;
+}
+
+.status{
+color:#5cff87;
+}
+
+/* GRID */
+.control-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+padding:20px;
+}
+
+/* PANELS */
+.panel{
+background:#07111d;
+border:1px solid #1f3a5a;
+padding:15px;
+min-height:250px;
+}
+
+.panel h3{
+margin-top:0;
+font-weight:500;
+color:#8cc6ff;
+}
+
+/* LOG PANEL */
+.log-panel{
+margin:20px;
+background:#07111d;
+border:1px solid #1f3a5a;
+padding:15px;
+height:180px;
+overflow:auto;
+}
+
+/* RADAR */
+#radar{
+width:200px;
+height:200px;
+border:1px solid #3fa7ff;
+border-radius:50%;
+margin:auto;
+position:relative;
+}
+
+#radar::after{
+content:"";
+position:absolute;
+width:2px;
+height:100%;
+background:#3fa7ff;
+left:50%;
+transform-origin:bottom;
+animation:spin 4s linear infinite;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg);}
+}
