@@ -1,51 +1,30 @@
-<link rel="stylesheet" href="/css/styles.css">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
 
-<nav class="navbar">
-<div class="logo">🛰 ExoHabitAI</div>
-<div class="nav-links">
-<a href="/">Home</a>
-<a href="/predict">Prediction</a>
-<a href="/mission">Mission</a>
-</div>
-</nav>
+<body>
 
-<h1>Habitability Analytics</h1>
+<div id="chart"></div>
 
-<div class="metrics">
-<div class="metric">4123<br>Total Planets</div>
-<div class="metric">384<br>Habitable</div>
-<div class="metric">0.41<br>Avg Score</div>
-</div>
+<script>
+fetch("http://127.0.0.1:5000/feature-importance")
+.then(res => res.json())
+.then(data => {
 
-<h2 style="text-align:center">Top 15 Habitable Planets</h2>
-<h2 style="text-align:center;margin-top:50px;">
-Scientific Visualizations
-</h2>
+    const features = data.map(x => x.feature);
+    const values = data.map(x => x.importance);
 
-<div class="viz-grid">
+    Plotly.newPlot('chart', [{
+        x: values,
+        y: features,
+        type: 'bar',
+        orientation: 'h'
+    }]);
+});
+</script>
 
-<div class="viz-card">
-<h3>Feature Importance</h3>
-<canvas id="importanceChart"></canvas>
-</div>
-
-<div class="viz-card">
-<h3>Habitability Distribution</h3>
-<canvas id="habitChart"></canvas>
-</div>
-
-<div class="viz-card full">
-<h3>Star–Planet Temperature Relationship</h3>
-<canvas id="scatterChart"></canvas>
-</div>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="/js/analytics.js"></script>
-
-<table>
-<tr><th>Rank</th><th>Planet</th><th>Score</th></tr>
-<tr><td>1</td><td>Kepler-442b</td><td>0.97</td></tr>
-<tr><td>2</td><td>TRAPPIST-1e</td><td>0.95</td></tr>
-</table>
+</body>
+</html>

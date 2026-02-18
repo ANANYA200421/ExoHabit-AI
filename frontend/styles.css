@@ -1,0 +1,39 @@
+body {
+    background: linear-gradient(to bottom, #020111, #000000);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.hero {
+    background: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564') no-repeat center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    color: white;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    background: #4facfe;
+    border: none;
+}
+
+.glow {
+    text-shadow: 0 0 15px #4facfe;
+}
