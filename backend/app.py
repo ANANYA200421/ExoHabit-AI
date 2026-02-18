@@ -1,32 +1,18 @@
-from flask import Flask, send_from_directory
-from routes import predict_bp
-import os
+from flask import Flask
+from flask_cors import CORS
+from routes import api
 
-BASE = os.path.dirname(os.path.abspath(__file__))
-FRONT = os.path.join(BASE, "../frontend")
 
-app = Flask(__name__)
-app.register_blueprint(predict_bp)
+def create_app():
+    app = Flask(__name__)
+    CORS(app)
 
-@app.route("/predict")
-def predict_page():
-    return send_from_directory(FRONT, "predict.html")
+    app.register_blueprint(api)
 
-@app.route("/dashboard")
-def dashboard_page():
-    return send_from_directory(FRONT, "dashboard.html")
+    return app
 
-@app.route("/mission")
-def mission_page():
-    return send_from_directory(FRONT, "mission.html")
 
-@app.route("/css/<path:p>")
-def css(p):
-    return send_from_directory(os.path.join(FRONT,"css"), p)
-
-@app.route("/js/<path:p>")
-def js(p):
-    return send_from_directory(os.path.join(FRONT,"js"), p)
+app = create_app()
 
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=False, port=5000)
+    app.run(debug=True)
